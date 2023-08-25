@@ -45,6 +45,16 @@ function Product() {
 
 
 
+    const ChangeHander =(item)=>{
+        console.log(item);
+        setTitle(item.title);
+        setDescription(item.description);
+        setCategory(item.category);
+        setPrice(item.price);
+        
+        setModalVisible(true);
+    }
+
     const deletHander=(id)=>{
         const newProducts = product.filter((item)=> item.id !==id )
         setProduct(newProducts);
@@ -72,6 +82,7 @@ function Product() {
                             <th>{item.description}</th>
                             <th><img style={{width:50}} src={item.image}></img></th>
                             <button onClick={()=>deletHander(item.id)}>Delete</button>
+                            <button onClick={()=>ChangeHander(item)}>Save Changes</button>
                         </tr>
                     )
                 })}
@@ -87,7 +98,7 @@ function Product() {
         <button onClick={()=>setModalVisible(false)}>close</button>
         <form>
                 <label for="exampleFormControlInput1" class="form-label">Category: </label>
-                <input onChange={(e)=>setCategory(e.target.value)} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Your Category Here" />
+                <input value={category} onChange={(e)=>setCategory(e.target.value)} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Your Category Here" />
 
                 <label for="exampleFormControlInput1" class="form-label">Price: </label>
                 <input onChange={(e)=>setPrice(e.target.value)} type="number" class="form-control" id="exampleFormControlInput1" placeholder="Enter Your Price Here" />
@@ -101,6 +112,8 @@ function Product() {
                 <label for="exampleFormControlInput1" class="form-label">Image: </label>
                 <input onChange={(e)=>setImagURL(e.target.value)} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Your Image URL Here" />
           <button onClick={submitHandler} style={{marginTop:10}} type="button" class="btn btn-primary">Submit</button>
+          
+          
           
         </form>
       </Modal>
